@@ -9,11 +9,7 @@ const inputRef = document.querySelector('#search-box');
 const countryList = document.querySelector('.country-list');
 const countryInfoRef = document.querySelector('.country-info');
 
-inputRef.addEventListener('input', debounce(onCountryInput, DEBOUNCE_DELAY));
-
-function failedInput() {
-  Notiflix.Notify.failure('Oops, there is no country with that name');
-}
+inputRef.addEventListener('input', debounce(onInput, DEBOUNCE_DELAY));
 
 function tooManyCountries() {
   Notiflix.Notify.info(
@@ -21,7 +17,11 @@ function tooManyCountries() {
   );
 }
 
-function onCountryInput() {
+function failedInput() {
+  Notiflix.Notify.failure('Oops, there is no country with that name');
+}
+
+function onInput() {
   const name = inputRef.value.trim();
   if (name === '') {
     return (countryList.innerHTML = ''), (countryInfoRef.innerHTML = '');
